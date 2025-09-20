@@ -1,0 +1,32 @@
+name: "documentEditor"
+
+on:
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - main
+      - test
+
+jobs:
+  Frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: "installing Angular via nvm"
+        run: |
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+              export NVM_DIR="$HOME/.nvm"
+              source "$NVM_DIR/nvm.sh"
+              nvm install --lts
+              nvm use --lts
+              npm install -g @angular/cli
+        working-directory: frontend
+
+      - name: "staring to lint"
+        run: ng lint
+        working-directory: frontend
+        
