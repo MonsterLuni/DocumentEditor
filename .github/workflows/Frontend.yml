@@ -25,9 +25,8 @@ jobs:
               nvm use --lts
               npm install -g @angular/cli
         shell: bash
-        working-directory: frontend
 
       - name: "staring to lint"
         run: ng lint
-        working-directory: frontend
+        working-directory: Frontend
         
