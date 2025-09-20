@@ -24,6 +24,10 @@ jobs:
       - name: Setup Angular CLI
         run: npm install -g @angular/cli
 
+      - name: Installing Dependencies
+        run: npm ci
+        working-directory: Frontend
+
       - name: Linting
         run: ng lint
         working-directory: Frontend
