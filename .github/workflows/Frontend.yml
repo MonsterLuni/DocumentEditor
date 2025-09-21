@@ -30,3 +30,7 @@ jobs:
       - name: Linting
         run: npx ng lint
         working-directory: Frontend
+
+      - name: Building
+        run: npx ng build
+        working-directory: Frontend
