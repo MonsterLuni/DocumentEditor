@@ -69,6 +69,7 @@ jobs:
     uses: ./.github/workflows/test_backend-documenteditor.yml
     permissions:
       id-token: write
+      contents: read
 
   call-frontend:
     needs: [ Backend, Frontend ]
