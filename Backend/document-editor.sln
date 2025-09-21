@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "document-editor", "document-editor\document-editor.csproj", "{798F2F92-1860-4A52-9E74-3E4AADFCDB6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "document-editor", "document-editor.csproj", "{798F2F92-1860-4A52-9E74-3E4AADFCDB6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
