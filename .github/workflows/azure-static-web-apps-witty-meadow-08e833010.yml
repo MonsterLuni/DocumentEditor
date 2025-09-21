@@ -2,7 +2,7 @@ name: Azure Frontend
 
 on:
   workflow_run:
-    workflows: [ "Verify-Frontend", "Verify-Backend"]
+    workflows: ["Verify-Frontend","Verify-Backend"]
     types:
       - completed
 
@@ -41,3 +41,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_MEADOW_08E833010 }}
           action: "close"
+          app_location: ''
