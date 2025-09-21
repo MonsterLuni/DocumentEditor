@@ -63,10 +63,10 @@ jobs:
         run: npx ng build
         working-directory: Frontend
 
-  CallAzure:
-    needs: [Backend, Frontend]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/test_backend-documenteditor.yml
-      - uses: ./.github/workflows/azure-static-web-apps-witty-meadow-08e833010.yml
-        
+  call-backend:
+    needs: [ Backend, Frontend ]
+    uses: ./.github/workflows/test_backend-documenteditor.yml
+
+  call-frontend:
+    needs: [ Backend, Frontend ]
+    uses: ./.github/workflows/azure-static-web-apps-witty-meadow-08e833010.yml
