@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: windows-latest
     permissions:
       contents: read #This is required for actions/checkout
