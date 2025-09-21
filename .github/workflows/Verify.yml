@@ -74,3 +74,4 @@ jobs:
   call-frontend:
     needs: [ Backend, Frontend ]
     uses: ./.github/workflows/azure-static-web-apps-witty-meadow-08e833010.yml
+    secrets: inherit
