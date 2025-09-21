@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Title} from '@angular/platform-browser';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
@@ -11,8 +11,8 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  translation: TranslateService = Inject(TranslateService);
-  title: Title = Inject(Title);
+  translation: TranslateService = inject(TranslateService);
+  title: Title = inject(Title);
   form!: FormGroup;
   constructor() {
     this.translation.stream('common.title').subscribe((res: string) => {
