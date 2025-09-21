@@ -9,6 +9,10 @@ on:
     branches:
       - main
       - test
+  pull_request_target:
+    branches:
+      - main
+      - test
 
 jobs:
   Backend:
