@@ -8,6 +8,7 @@ on:
     workflows: ["Verify-Frontend","Verify-Backend"]
     types:
       - completed
+    branches: [main,test]
 
 jobs:
   build:
