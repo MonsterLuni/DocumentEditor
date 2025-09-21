@@ -3,18 +3,14 @@
 
 name: Azure Backend
 
-
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: [Verify-Backend, Verify-Frontend]
-    types: [completed]
+  workflow_call:
 
 jobs:
-  build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  deploy:
     runs-on: windows-latest
     permissions:
+      id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
 
     steps:
@@ -27,9 +23,11 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+        working-directory: Backend
 
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        working-directory: Backend
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -37,19 +35,11 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
-
-    steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -64,4 +54,3 @@ jobs:
           app-name: 'Backend-DocumentEditor'
           slot-name: 'Production'
           package: .
-          

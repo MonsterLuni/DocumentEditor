@@ -1,0 +1,79 @@
+﻿name: Verify
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - main
+      - test
+
+jobs:
+  Backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Installing Dependencies
+        run: dotnet restore document-editor.sln
+        working-directory: Backend
+
+      - name: Format
+        run: dotnet format document-editor.sln --verify-no-changes
+        working-directory: Backend
+        
+      - name: Test
+        run: dotnet test document-editor.sln
+        working-directory: Backend
+        
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        working-directory: Backend
+
+  Frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          cache-dependency-path: Frontend/package-lock.json
+
+      - name: Installing Dependencies
+        run: npm ci
+        working-directory: Frontend
+
+      - name: Linting
+        run: npx ng lint
+        working-directory: Frontend
+
+      - name: Building
+        run: npx ng build
+        working-directory: Frontend
+
+  call-backend:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref != 'main'
+    needs: [ Backend, Frontend ]
+    uses: ./.github/workflows/test_backend-documenteditor.yml
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
+  call-frontend:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref != 'main'
+    needs: [ Backend, Frontend ]
+    uses: ./.github/workflows/azure-static-web-apps-witty-meadow-08e833010.yml
+    secrets: inherit

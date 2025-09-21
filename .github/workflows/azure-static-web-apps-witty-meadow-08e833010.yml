@@ -1,16 +1,11 @@
 name: Azure Frontend
 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: [Verify-Backend, Verify-Frontend]
-    types: [completed]
+  workflow_call: 
 
 jobs:
-  build_and_deploy_job:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
         with:
@@ -29,16 +24,3 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "dist/document-editor/browser" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_MEADOW_08E833010 }}
-          action: "close"
-          app_location: ''
