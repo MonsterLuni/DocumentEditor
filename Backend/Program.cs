@@ -10,10 +10,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseOpenApi();
-    app.UseSwaggerUi();
+
 }
 
+app.UseOpenApi();
+app.UseSwaggerUi();
 app.UseHttpsRedirection();
 
 var summaries = new[]

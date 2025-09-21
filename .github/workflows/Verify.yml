@@ -1,6 +1,5 @@
 ﻿name: Verify
 
-
 on:
   workflow_dispatch:
   push:
