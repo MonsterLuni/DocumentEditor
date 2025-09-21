@@ -1,10 +1,7 @@
 name: Azure Frontend
 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: [Verify-Backend, Verify-Frontend]
-    types: [completed]
+  workflow_call: 
 
 jobs:
   build_and_deploy_job:
