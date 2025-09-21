@@ -1,4 +1,4 @@
-name: "documentEditor"
+name: Frontend
 
 on:
   push:
@@ -31,4 +31,3 @@ jobs:
       - name: Linting
         run: ng lint
         working-directory: Frontend
-        
