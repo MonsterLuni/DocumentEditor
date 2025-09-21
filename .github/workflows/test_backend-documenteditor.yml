@@ -5,10 +5,10 @@ name: Azure Backend
 
 on:
   workflow_run:
-    workflows: ["Verify-Frontend","Verify-Backend"]
+    workflows: [Verify-Frontend,Verify-Backend]
     types:
       - completed
-    branches: [main,test]
+    branches: [test]
 
 jobs:
   build:
