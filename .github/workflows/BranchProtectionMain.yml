@@ -13,6 +13,6 @@ jobs:
         run: |
           if [[ ${GITHUB_HEAD_REF} != test ]]; 
           then
-            echo "Error: Pull request must come from 'staging' or 'hotfix/' branch"
+            echo "Error: Pull request must come from test Branch"
             exit 1
           fi
