@@ -5,7 +5,6 @@ on:
   workflow_run:
     workflows: [Verify-Backend, Verify-Frontend]
     types: [completed]
-    branches: [test]
 
 jobs:
   build_and_deploy_job:
