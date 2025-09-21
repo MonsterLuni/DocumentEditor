@@ -20,14 +20,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
-
-      - name: Setup Angular CLI
-        run: npm install -g @angular/cli
+          cache: 'npm'
+          cache-dependency-path: Frontend/package-lock.json
 
       - name: Installing Dependencies
         run: npm ci
         working-directory: Frontend
 
       - name: Linting
-        run: ng lint
+        run: npx ng lint
         working-directory: Frontend
