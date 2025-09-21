@@ -1,17 +1,14 @@
 name: Azure Frontend
 
 on:
-  push:
-    branches:
-      - test
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - test
+  workflow_run:
+    workflows: [Verify-Backend, Verify-Frontend]
+    types: [completed]
+    branches: [test]
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -44,3 +41,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_MEADOW_08E833010 }}
           action: "close"
+          app_location: ''
