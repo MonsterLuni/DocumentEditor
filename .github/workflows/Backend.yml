@@ -10,7 +10,7 @@ on:
       - test
 
 jobs:
-  Frontend:
+  Backend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
