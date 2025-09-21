@@ -2,10 +2,8 @@
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - test
   pull_request:
+    types: [closed]
     branches:
       - main
       - test
@@ -64,6 +62,7 @@ jobs:
         working-directory: Frontend
 
   call-backend:
+    if: github.event.pull_request.merged == true
     needs: [ Backend, Frontend ]
     uses: ./.github/workflows/test_backend-documenteditor.yml
     secrets: inherit
@@ -72,6 +71,7 @@ jobs:
       contents: read
 
   call-frontend:
+    if: github.event.pull_request.merged == true
     needs: [ Backend, Frontend ]
     uses: ./.github/workflows/azure-static-web-apps-witty-meadow-08e833010.yml
     secrets: inherit
