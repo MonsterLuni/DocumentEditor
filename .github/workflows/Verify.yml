@@ -65,7 +65,7 @@ jobs:
         working-directory: Frontend
 
   call-backend:
-    if: github.event.pull_request.base.ref != 'main'
+    if: github.event_name == 'push' && github.event.pull_request.base.ref != 'main'
     needs: [ Backend, Frontend ]
     uses: ./.github/workflows/test_backend-documenteditor.yml
     secrets: inherit
@@ -74,7 +74,7 @@ jobs:
       contents: read
 
   call-frontend:
-    if: github.event.pull_request.base.ref != 'main'
+    if: github.event_name == 'push' && github.event.pull_request.base.ref != 'main'
     needs: [ Backend, Frontend ]
     uses: ./.github/workflows/azure-static-web-apps-witty-meadow-08e833010.yml
     secrets: inherit
