@@ -3,11 +3,12 @@
 
 name: Azure Backend
 
+
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: [Verify-Backend, Verify-Frontend]
     types: [completed]
-    branches: [test]
 
 jobs:
   build:
