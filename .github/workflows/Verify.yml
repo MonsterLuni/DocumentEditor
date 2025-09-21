@@ -67,6 +67,7 @@ jobs:
   call-backend:
     needs: [ Backend, Frontend ]
     uses: ./.github/workflows/test_backend-documenteditor.yml
+    secrets: inherit
     permissions:
       id-token: write
       contents: read
