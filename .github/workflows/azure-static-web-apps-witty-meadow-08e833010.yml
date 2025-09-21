@@ -2,10 +2,9 @@ name: Azure Frontend
 
 on:
   workflow_run:
-    workflows: ["Verify-Frontend","Verify-Backend"]
-    types:
-      - completed
-    branches: [main,test]
+    workflows: [Verify-Backend, Verify-Frontend]
+    types: [completed]
+    branches: [test]
 
 jobs:
   build_and_deploy_job:
