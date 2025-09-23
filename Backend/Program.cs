@@ -23,7 +23,7 @@ var app = builder.Build();
 
 Console.WriteLine($"Current Environment: {app.Environment.EnvironmentName}");
 // Configure the HTTP request pipeline.
-if(app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseCors();
 }

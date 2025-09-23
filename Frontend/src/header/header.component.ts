@@ -16,9 +16,8 @@ export class HeaderComponent implements OnInit {
   translation: TranslateService = inject(TranslateService);
   title: Title = inject(Title);
   form!: FormGroup;
-  http: HttpClient;
-  constructor(httpClient: HttpClient) {
-    this.http = httpClient;
+  http: HttpClient = inject(HttpClient);
+  constructor() {
     this.translation.stream('common.title').subscribe((res: string) => {
       this.title.setTitle(res)
     });
