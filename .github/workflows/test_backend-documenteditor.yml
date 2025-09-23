@@ -22,7 +22,9 @@ jobs:
           dotnet-version: '9.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: |
+          $env:ASPNETCORE_ENVIRONMENT = "Staging"
+          dotnet run --configuration Release
         working-directory: Backend
 
       - name: dotnet publish
