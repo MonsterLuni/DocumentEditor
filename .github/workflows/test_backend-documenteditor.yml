@@ -24,7 +24,7 @@ jobs:
       - name: Build with dotnet
         run: |
           $env:ASPNETCORE_ENVIRONMENT = "Staging"
-          dotnet run --configuration Release
+          dotnet build --configuration Release
         working-directory: Backend
 
       - name: dotnet publish
